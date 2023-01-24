@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System;
+
 namespace Infinite.Core.Project.Controllers
 {
     public class MoviesController : Controller
@@ -34,9 +36,33 @@ namespace Infinite.Core.Project.Controllers
             {
                 client.BaseAddress = new System.Uri(_configuration["ApiUrl.api"]);
                 var result = await client.GetAsync($"Movies/GetMovieById/{id}");
-                if(result.IsSuccessStatusCode)
+                if (result.IsSuccessStatusCode)
                 {
                     movie = await result.Content.ReadAsAsync<MovieViewModel>();
+                }
+            }
+            return View(movie);
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(MovieViewModel movie)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(_configuration["ApiUrl:api"]);
+                    var result = await client.PostAsJsonAsync($"Movies/CreateMovie", movie);
+                    if (result.StatusCode == System.Net.HttpStatusCode.Created)
+                    {
+                        return RedirectToAction("Index");
+                    }
                 }
             }
             return View(movie);

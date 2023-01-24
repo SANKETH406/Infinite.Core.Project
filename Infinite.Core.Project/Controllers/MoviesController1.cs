@@ -68,5 +68,27 @@ namespace Infinite.Core.Project.Controllers
             }
             return View(movie);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(MovieViewModel movie)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(_configuration["ApiUrl:api"]);
+                    var result = await client.PutAsJsonAsync($"Movies/UpdateMovie/{movie.Id}", movie);
+                    if (result.StatusCode == System.Net.HttpStatusCode.NoContent)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Server Error, Please try later");
+                    }
+                }
+            }
+            return View();
+        }
     }
 }

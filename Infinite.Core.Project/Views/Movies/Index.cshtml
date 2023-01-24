@@ -27,7 +27,9 @@
                     <tr>
                         <td>@item.MovieName</td>
                         <td>
-                            <a asp:asp-controller="Movies" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                            <a asp:asp-controller="Movies" class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                                <a asp:asp-controller="Movies" class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                <a asp:asp-controller="Movies" class="btn btn-primary" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                         </td>
                     </tr>
                 }

@@ -26,5 +26,20 @@ namespace Infinite.Core.Project.Controllers
             }
             return View(movies);
         }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            MovieViewModel movie = null;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new System.Uri(_configuration["ApiUrl.api"]);
+                var result = await client.GetAsync($"Movies/GetMovieById/{id}");
+                if(result.IsSuccessStatusCode)
+                {
+                    movie = await result.Content.ReadAsAsync<MovieViewModel>();
+                }
+            }
+            return View(movie);
+        }
     }
 }

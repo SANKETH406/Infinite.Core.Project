@@ -1,0 +1,21 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "provider": "cdnjs",
+      "library": "jquery-validate@1.19.5",
+      "destination": "wwwroot/lib/jquery-validate/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "bootstrap@5.2.3",
+      "destination": "wwwroot/bootstrap/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "jquery@3.6.3",
+      "destination": "wwwroot/jquery/"
+    }
+  ]
+}

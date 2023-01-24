@@ -19,7 +19,7 @@ namespace Infinite.Core.Project.Controllers
             List<MovieViewModel> movies = new();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new System.Uri(_configuration["ApiUrl:api"]);
+                client.BaseAddress = new Uri(_configuration["ApiUrl:api"]);
                 var result = await client.GetAsync("Movies/GetAllMovies");
                 if (result.IsSuccessStatusCode)
                 {
@@ -34,7 +34,7 @@ namespace Infinite.Core.Project.Controllers
             MovieViewModel movie = null;
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new System.Uri(_configuration["ApiUrl.api"]);
+                client.BaseAddress = new System.Uri(_configuration["ApiUrl:api"]);
                 var result = await client.GetAsync($"Movies/GetMovieById/{id}");
                 if (result.IsSuccessStatusCode)
                 {
@@ -43,6 +43,8 @@ namespace Infinite.Core.Project.Controllers
             }
             return View(movie);
         }
+
+
 
         [HttpGet]
         public IActionResult Create()

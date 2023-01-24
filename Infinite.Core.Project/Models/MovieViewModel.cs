@@ -9,5 +9,6 @@ namespace Infinite.Core.Project.Models
         public string ProductionName { get; set; }
         public DateTime ReleaseDate { get; set; }
         public int GenreId { get; set; }
+        public string GenreName { get; set; }
     }
 }

@@ -10,7 +10,8 @@ namespace Infinite.Core.Project.Controllers
 {
     public class MoviesController : Controller
     {
-        private readonly IConfiguration _configuration; public MoviesController(IConfiguration configuration)
+        private readonly IConfiguration _configuration; 
+        public MoviesController(IConfiguration configuration)
         {
             _configuration = configuration;
         }
@@ -43,8 +44,6 @@ namespace Infinite.Core.Project.Controllers
             }
             return View(movie);
         }
-
-
 
         [HttpGet]
         public IActionResult Create()
